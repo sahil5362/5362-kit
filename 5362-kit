@@ -1,5 +1,6 @@
 --\\5362 Kit//--
 --\\For Level 3 Executor//--
+
 local kit5362 = Instance.new("ScreenGui")
 local mainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
@@ -31,18 +32,33 @@ local dc = Instance.new("TextLabel")
 local dc2 = Instance.new("TextLabel")
 local cre2 = Instance.new("TextLabel")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local Dragging = false
+local UIS = game:GetService("UserInputService")
 
--- Add an icon for toggling the mainFrame
+-- Create and set up the ScreenGui
+kit5362.Name = "kit5362"
+kit5362.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+kit5362.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+kit5362.ResetOnSpawn = false
+
+-- Create and set up the mainFrame
+mainFrame.Name = "mainFrame"
+mainFrame.Parent = kit5362
+mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Black background
+mainFrame.Position = UDim2.new(0, 424, 0, 116)
+mainFrame.Size = UDim2.new(0, 770, 0, 294)
+mainFrame.Visible = true -- Start visible for debugging
+
+UICorner.Parent = mainFrame
+
+-- Create an icon for toggling the mainFrame
 local iconButton = Instance.new("ImageButton")
 iconButton.Parent = kit5362
 iconButton.Position = UDim2.new(0, 50, 0, 50)
 iconButton.Size = UDim2.new(0, 50, 0, 50)
-iconButton.Image = "rbxassetid://6023426915"  -- An example image for the icon
+iconButton.Image = "rbxassetid://6023426915"  -- Example image for the icon
 iconButton.BackgroundTransparency = 1
 
 -- Make the icon draggable
-local UIS = game:GetService("UserInputService")
 local dragToggle = nil
 local dragStart = nil
 local startPos = nil
@@ -78,21 +94,6 @@ iconButton.MouseButton1Click:Connect(function()
     mainFrame.Visible = not mainFrame.Visible
 end)
 
--- Properties:
-kit5362.Name = "kit5362"
-kit5362.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-kit5362.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-kit5362.ResetOnSpawn = false
-
-mainFrame.Name = "mainFrame"
-mainFrame.Parent = kit5362
-mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-mainFrame.Position = UDim2.new(0, 424, 0, 116)
-mainFrame.Size = UDim2.new(0, 770, 0, 294)
-mainFrame.Visible = false -- Start hidden; toggle with iconButton
-
-UICorner.Parent = mainFrame
-
 -- Make the mainFrame draggable
 local dragMain = false
 local dragInputMain
@@ -125,8 +126,26 @@ UIS.InputChanged:Connect(function(input)
     end
 end)
 
--- The rest of your code (Buttons, Labels, etc.) continues here.
--- Just place all the previous button logic under `mainFrame`.
+-- Sample Button to ensure visibility
+local sampleButton = Instance.new("TextButton")
+sampleButton.Parent = mainFrame
+sampleButton.Position = UDim2.new(0, 10, 0, 10)
+sampleButton.Size = UDim2.new(0, 100, 0, 50)
+sampleButton.Text = "Sample Button"
+sampleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red background for visibility
 
--- Buttons for hitbox control, transparency, etc.
--- All original button setups remain unchanged
+-- Add remaining UI elements and buttons here
+-- You should create and configure Buttons, Labels, etc., as needed.
+
+-- Example for adding a close button
+Close.Name = "Close"
+Close.Parent = mainFrame
+Close.Position = UDim2.new(0, 710, 0, 10)
+Close.Size = UDim2.new(0, 50, 0, 50)
+Close.Text = "X"
+Close.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red background for visibility
+Close.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text
+
+Close.MouseButton1Click:Connect(function()
+    mainFrame.Visible = false
+end)
