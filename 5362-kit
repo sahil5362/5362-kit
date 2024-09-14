@@ -38,7 +38,7 @@ local iconButton = Instance.new("ImageButton")
 iconButton.Parent = kit5362
 iconButton.Position = UDim2.new(0, 50, 0, 50)
 iconButton.Size = UDim2.new(0, 50, 0, 50)
-iconButton.Image = "rbxassetid://6023426915"  -- Example image for the icon
+iconButton.Image = "rbxassetid://6023426915"  -- An example image for the icon
 iconButton.BackgroundTransparency = 1
 
 -- Make the icon draggable
@@ -79,14 +79,14 @@ iconButton.MouseButton1Click:Connect(function()
 end)
 
 -- Properties:
-kit5362.Name = "5362 Kit"
+kit5362.Name = "kit5362"
 kit5362.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 kit5362.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 kit5362.ResetOnSpawn = false
 
 mainFrame.Name = "mainFrame"
 mainFrame.Parent = kit5362
-mainFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Changed to red
+mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 mainFrame.Position = UDim2.new(0, 424, 0, 116)
 mainFrame.Size = UDim2.new(0, 770, 0, 294)
 mainFrame.Visible = false -- Start hidden; toggle with iconButton
