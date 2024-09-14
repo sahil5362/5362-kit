@@ -1,7 +1,7 @@
---\\5362 Kit//--
+--\\TrollsDev//--
 --\\For Level 3 Executor//--
 
-local kit5362 = Instance.new("ScreenGui")
+local trollsKit = Instance.new("ScreenGui")
 local mainFrame = Instance.new("Frame")
 local UICorner = Instance.new("UICorner")
 local Buttons = Instance.new("Folder")
@@ -32,120 +32,332 @@ local dc = Instance.new("TextLabel")
 local dc2 = Instance.new("TextLabel")
 local cre2 = Instance.new("TextLabel")
 local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-local UIS = game:GetService("UserInputService")
 
--- Create and set up the ScreenGui
-kit5362.Name = "kit5362"
-kit5362.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-kit5362.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-kit5362.ResetOnSpawn = false
+--Properties:
 
--- Create and set up the mainFrame
+trollsKit.Name = "trollsKit"
+trollsKit.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+trollsKit.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+trollsKit.ResetOnSpawn = false
+
 mainFrame.Name = "mainFrame"
-mainFrame.Parent = kit5362
-mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Black background
+mainFrame.Parent = trollsKit
+mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 mainFrame.Position = UDim2.new(0, 424, 0, 116)
 mainFrame.Size = UDim2.new(0, 770, 0, 294)
-mainFrame.Visible = true -- Start visible for debugging
+mainFrame.Active = true
+mainFrame.Draggable = true
 
 UICorner.Parent = mainFrame
 
--- Create an icon for toggling the mainFrame
-local iconButton = Instance.new("ImageButton")
-iconButton.Parent = kit5362
-iconButton.Position = UDim2.new(0, 50, 0, 50)
-iconButton.Size = UDim2.new(0, 50, 0, 50)
-iconButton.Image = "rbxassetid://6023426915"  -- Example image for the icon
-iconButton.BackgroundTransparency = 1
+Buttons.Name = "Buttons"
+Buttons.Parent = mainFrame
 
--- Make the icon draggable
-local dragToggle = nil
-local dragStart = nil
-local startPos = nil
+HitboxButtons.Name = "HitboxButtons"
+HitboxButtons.Parent = Buttons
 
-local function updateDrag(input)
+_25.Name = "25"
+_25.Parent = HitboxButtons
+_25.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_25.Position = UDim2.new(0.864838481, 0, 0.380594462, 0)
+_25.Size = UDim2.new(0, 57, 0, 19)
+_25.Font = Enum.Font.SourceSansBold
+_25.Text = "25"
+_25.TextColor3 = Color3.fromRGB(255, 234, 0)
+_25.TextScaled = true
+_25.TextSize = 14.000
+_25.TextStrokeTransparency = 0.420
+_25.TextWrapped = true
+
+UICorner_2.Parent = _25
+
+_50.Name = "50"
+_50.Parent = HitboxButtons
+_50.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_50.Position = UDim2.new(0.769282937, 0, 0.481322408, 0)
+_50.Size = UDim2.new(0, 57, 0, 19)
+_50.Font = Enum.Font.SourceSansBold
+_50.Text = "50"
+_50.TextColor3 = Color3.fromRGB(255, 234, 0)
+_50.TextScaled = true
+_50.TextSize = 14.000
+_50.TextStrokeTransparency = 0.420
+_50.TextWrapped = true
+
+UICorner_3.Parent = _50
+
+_75.Name = "75"
+_75.Parent = HitboxButtons
+_75.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_75.Position = UDim2.new(0.769282937, 0, 0.590046585, 0)
+_75.Size = UDim2.new(0, 57, 0, 19)
+_75.Font = Enum.Font.SourceSansBold
+_75.Text = "75"
+_75.TextColor3 = Color3.fromRGB(255, 234, 0)
+_75.TextScaled = true
+_75.TextSize = 14.000
+_75.TextStrokeTransparency = 0.420
+_75.TextWrapped = true
+
+UICorner_4.Parent = _75
+
+_10.Name = "10"
+_10.Parent = HitboxButtons
+_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_10.Position = UDim2.new(0.689282835, 0, 0.380594462, 0)
+_10.Size = UDim2.new(0, 57, 0, 19)
+_10.Font = Enum.Font.SourceSansBold
+_10.Text = "10"
+_10.TextColor3 = Color3.fromRGB(255, 234, 0)
+_10.TextScaled = true
+_10.TextSize = 14.000
+_10.TextStrokeTransparency = 0.420
+_10.TextWrapped = true
+
+UICorner_5.Parent = _10
+
+_5.Name = "5"
+_5.Parent = HitboxButtons
+_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_5.Position = UDim2.new(0.778171897, 0, 0.275510192, 0)
+_5.Size = UDim2.new(0, 57, 0, 19)
+_5.Font = Enum.Font.SourceSansBold
+_5.Text = "5"
+_5.TextColor3 = Color3.fromRGB(255, 234, 0)
+_5.TextScaled = true
+_5.TextSize = 14.000
+_5.TextStrokeTransparency = 0.420
+_5.TextWrapped = true
+
+UICorner_6.Parent = _5
+
+HitboxTransparency.Name = "HitboxTransparency"
+HitboxTransparency.Parent = Buttons
+HitboxTransparency.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HitboxTransparency.Position = UDim2.new(0.0202256888, 0, 0.588435352, 0)
+HitboxTransparency.Size = UDim2.new(0, 137, 0, 37)
+HitboxTransparency.Font = Enum.Font.Unknown
+HitboxTransparency.Text = "Hitbox Transparency: 0.75"
+HitboxTransparency.TextColor3 = Color3.fromRGB(255, 234, 0)
+HitboxTransparency.TextScaled = true
+HitboxTransparency.TextSize = 14.000
+HitboxTransparency.TextStrokeTransparency = 0.420
+HitboxTransparency.TextWrapped = true
+
+UICorner_7.Parent = HitboxTransparency
+
+Close.Name = "Close"
+Close.Parent = Buttons
+Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Close.Position = UDim2.new(0.955029786, 0, -0.0464853868, 0)
+Close.Size = UDim2.new(0, 22, 0, 18)
+Close.Font = Enum.Font.Unknown
+Close.Text = "X"
+Close.TextColor3 = Color3.fromRGB(0, 0, 0)
+Close.TextScaled = true
+Close.TextSize = 14.000
+Close.TextWrapped = true
+
+UICorner_8.Parent = Close
+
+HitboxDistance.Name = "HitboxDistance"
+HitboxDistance.Parent = Buttons
+HitboxDistance.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HitboxDistance.Position = UDim2.new(0.0217543244, 0, 0.435016245, 0)
+HitboxDistance.Size = UDim2.new(0, 137, 0, 37)
+HitboxDistance.Font = Enum.Font.Unknown
+HitboxDistance.Text = "Proximity-Based Hitbox Scaling: 30"
+HitboxDistance.TextColor3 = Color3.fromRGB(255, 234, 0)
+HitboxDistance.TextScaled = true
+HitboxDistance.TextSize = 14.000
+HitboxDistance.TextStrokeTransparency = 0.420
+HitboxDistance.TextWrapped = true
+
+UICorner_9.Parent = HitboxDistance
+
+Labels.Name = "Labels"
+Labels.Parent = mainFrame
+
+HitboxInfo.Name = "HitboxInfo"
+HitboxInfo.Parent = Labels
+HitboxInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HitboxInfo.BackgroundTransparency = 1.000
+HitboxInfo.Position = UDim2.new(0.7388165, 0, 0.159863949, 0)
+HitboxInfo.Size = UDim2.new(0, 96, 0, 24)
+HitboxInfo.Font = Enum.Font.Unknown
+HitboxInfo.Text = "* Hitbox Increase *"
+HitboxInfo.TextColor3 = Color3.fromRGB(255, 255, 255)
+HitboxInfo.TextScaled = true
+HitboxInfo.TextSize = 14.000
+HitboxInfo.TextWrapped = true
+
+BuildTip.Name = "BuildTip"
+BuildTip.Parent = Labels
+BuildTip.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+BuildTip.BackgroundTransparency = 1.000
+BuildTip.Position = UDim2.new(0.7388165, 0, 0.229264677, 0)
+BuildTip.Size = UDim2.new(0, 96, 0, 23)
+BuildTip.Font = Enum.Font.Unknown
+BuildTip.Text = "Weapons: All"
+BuildTip.TextColor3 = Color3.fromRGB(255, 255, 255)
+BuildTip.TextScaled = true
+BuildTip.TextSize = 14.000
+BuildTip.TextWrapped = true
+
+Title.Name = "Title"
+Title.Parent = Labels
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.Position = UDim2.new(0.0300000001, 0, 0.015625, 0)
+Title.Size = UDim2.new(0, 101, 0, 38)
+Title.Font = Enum.Font.Unknown
+Title.Text = "TrollsKit"
+Title.TextColor3 = Color3.fromRGB(255, 234, 0)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextStrokeTransparency = 0.500
+Title.TextWrapped = true
+
+version.Name = "version"
+version.Parent = Labels
+version.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+version.BackgroundTransparency = 1.000
+version.Position = UDim2.new(0.0578947383, 0, 0.779381871, 0)
+version.Size = UDim2.new(0, 78, 0, 25)
+version.Font = Enum.Font.Unknown
+version.Text = "Version: 4.0"
+version.TextColor3 = Color3.fromRGB(255, 234, 0)
+version.TextScaled = true
+version.TextSize = 14.000
+version.TextWrapped = true
+
+HideWarn.Name = "HideWarn"
+HideWarn.Parent = Labels
+HideWarn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HideWarn.BackgroundTransparency = 1.000
+HideWarn.Position = UDim2.new(0.0578947383, 0, 0.772727251, 0)
+HideWarn.Size = UDim2.new(0, 191, 0, 25)
+HideWarn.Font = Enum.Font.Unknown
+HideWarn.Text = "*Press Y to Hide/Show*"
+HideWarn.TextColor3 = Color3.fromRGB(255, 234, 0)
+HideWarn.TextScaled = true
+HideWarn.TextSize = 14.000
+HideWarn.TextWrapped = true
+
+dc.Name = "dc"
+dc.Parent = Labels
+dc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+dc.BackgroundTransparency = 1.000
+dc.Position = UDim2.new(0.015873016, 0, 0.944444418, 0)
+dc.Size = UDim2.new(0, 109, 0, 23)
+dc.Font = Enum.Font.Unknown
+dc.Text = "Join our Discord!"
+dc.TextColor3 = Color3.fromRGB(255, 234, 0)
+dc.TextScaled = true
+dc.TextSize = 14.000
+dc.TextWrapped = true
+
+dc2.Name = "dc2"
+dc2.Parent = Labels
+dc2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+dc2.BackgroundTransparency = 1.000
+dc2.Position = UDim2.new(0.0100000001, 0, 0.944444418, 0)
+dc2.Size = UDim2.new(0, 137, 0, 23)
+dc2.Font = Enum.Font.Unknown
+dc2.Text = "https://discord.gg/example"
+dc2.TextColor3 = Color3.fromRGB(255, 234, 0)
+dc2.TextScaled = true
+dc2.TextSize = 14.000
+dc2.TextWrapped = true
+
+cre2.Name = "cre2"
+cre2.Parent = Labels
+cre2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+cre2.BackgroundTransparency = 1.000
+cre2.Position = UDim2.new(0.0100000001, 0, 0.81081079, 0)
+cre2.Size = UDim2.new(0, 110, 0, 23)
+cre2.Font = Enum.Font.Unknown
+cre2.Text = "Created By TROLLSDEV"
+cre2.TextColor3 = Color3.fromRGB(255, 234, 0)
+cre2.TextScaled = true
+cre2.TextSize = 14.000
+cre2.TextWrapped = true
+
+-- Script:
+
+local UIS = game:GetService("UserInputService")
+local frame = mainFrame
+local dragStart, startPos
+
+local function updateInput(input)
     local delta = input.Position - dragStart
-    iconButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 end
 
-iconButton.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragToggle = true
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragStart = input.Position
-        startPos = iconButton.Position
+        startPos = frame.Position
         input.Changed:Connect(function()
             if input.UserInputState == Enum.UserInputState.End then
-                dragToggle = false
+                dragStart = nil
             end
         end)
     end
 end)
 
-iconButton.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        if dragToggle then
-            updateDrag(input)
+frame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        if dragStart then
+            updateInput(input)
         end
     end
 end)
 
--- Toggle the menu when iconButton is clicked
-iconButton.MouseButton1Click:Connect(function()
-    mainFrame.Visible = not mainFrame.Visible
-end)
-
--- Make the mainFrame draggable
-local dragMain = false
-local dragInputMain
-local dragStartMain
-local startPosMain
-
-mainFrame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragMain = true
-        dragStartMain = input.Position
-        startPosMain = mainFrame.Position
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragMain = false
-            end
-        end)
-    end
-end)
-
-mainFrame.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInputMain = input
-    end
-end)
-
-UIS.InputChanged:Connect(function(input)
-    if input == dragInputMain and dragMain then
-        local delta = input.Position - dragStartMain
-        mainFrame.Position = UDim2.new(startPosMain.X.Scale, startPosMain.X.Offset + delta.X, startPosMain.Y.Scale, startPosMain.Y.Offset + delta.Y)
-    end
-end)
-
--- Sample Button to ensure visibility
-local sampleButton = Instance.new("TextButton")
-sampleButton.Parent = mainFrame
-sampleButton.Position = UDim2.new(0, 10, 0, 10)
-sampleButton.Size = UDim2.new(0, 100, 0, 50)
-sampleButton.Text = "Sample Button"
-sampleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red background for visibility
-
--- Add remaining UI elements and buttons here
--- You should create and configure Buttons, Labels, etc., as needed.
-
--- Example for adding a close button
-Close.Name = "Close"
-Close.Parent = mainFrame
-Close.Position = UDim2.new(0, 710, 0, 10)
-Close.Size = UDim2.new(0, 50, 0, 50)
-Close.Text = "X"
-Close.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red background for visibility
-Close.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text
-
 Close.MouseButton1Click:Connect(function()
-    mainFrame.Visible = false
+    trollsKit:Destroy()
+end)
+
+-- Additional functionality for buttons (hitbox sizes, transparency, etc.)
+local hitboxSize = 10
+local transparency = 0.75
+local distance = 30
+
+local function setHitboxSize(size)
+    hitboxSize = size
+    -- Update hitbox size in game (you need to add code here)
+end
+
+local function setHitboxTransparency(trans)
+    transparency = trans
+    -- Update hitbox transparency in game (you need to add code here)
+end
+
+local function setHitboxDistance(dist)
+    distance = dist
+    -- Update hitbox distance in game (you need to add code here)
+end
+
+_25.MouseButton1Click:Connect(function() setHitboxSize(25) end)
+_50.MouseButton1Click:Connect(function() setHitboxSize(50) end)
+_75.MouseButton1Click:Connect(function() setHitboxSize(75) end)
+_10.MouseButton1Click:Connect(function() setHitboxSize(10) end)
+_5.MouseButton1Click:Connect(function() setHitboxSize(5) end)
+
+HitboxTransparency.MouseButton1Click:Connect(function()
+    transparency = transparency == 0.75 and 0.5 or 0.75
+    HitboxTransparency.Text = "Hitbox Transparency: " .. transparency
+    setHitboxTransparency(transparency)
+end)
+
+HitboxDistance.MouseButton1Click:Connect(function()
+    distance = distance == 30 and 50 or 30
+    HitboxDistance.Text = "Proximity-Based Hitbox Scaling: " .. distance
+    setHitboxDistance(distance)
+end)
+
+UIS.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.Y then
+        trollsKit.Enabled = not trollsKit.Enabled
+    end
 end)
