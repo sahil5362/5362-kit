@@ -1,363 +1,122 @@
---\\TrollsDev//--
---\\For Level 3 Executor//--
+-- Define UI elements for transparency and hitbox scaling
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local DragFrame = Instance.new("Frame")
+local CloseButton = Instance.new("TextButton")
+local TransparencySlider = Instance.new("TextButton")
+local SizeSlider = Instance.new("TextButton")
+local TransparencyLabel = Instance.new("TextLabel")
+local SizeLabel = Instance.new("TextLabel")
 
-local trollsKit = Instance.new("ScreenGui")
-local mainFrame = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local Buttons = Instance.new("Folder")
-local HitboxButtons = Instance.new("Folder")
-local _25 = Instance.new("TextButton")
-local UICorner_2 = Instance.new("UICorner")
-local _50 = Instance.new("TextButton")
-local UICorner_3 = Instance.new("UICorner")
-local _75 = Instance.new("TextButton")
-local UICorner_4 = Instance.new("UICorner")
-local _10 = Instance.new("TextButton")
-local UICorner_5 = Instance.new("UICorner")
-local _5 = Instance.new("TextButton")
-local UICorner_6 = Instance.new("UICorner")
-local HitboxTransparency = Instance.new("TextButton")
-local UICorner_7 = Instance.new("UICorner")
-local Close = Instance.new("TextButton")
-local UICorner_8 = Instance.new("UICorner")
-local HitboxDistance = Instance.new("TextButton")
-local UICorner_9 = Instance.new("UICorner")
-local Labels = Instance.new("Folder")
-local HitboxInfo = Instance.new("TextLabel")
-local BuildTip = Instance.new("TextLabel")
-local Title = Instance.new("TextLabel")
-local version = Instance.new("TextLabel")
-local HideWarn = Instance.new("TextLabel")
-local dc = Instance.new("TextLabel")
-local dc2 = Instance.new("TextLabel")
-local cre2 = Instance.new("TextLabel")
-local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+ScreenGui.Name = "5362-Kit"
+ScreenGui.Parent = game.CoreGui
 
---Properties:
+-- Frame settings
+Frame.Name = "MainFrame"
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 0.2
+Frame.Position = UDim2.new(0.2, 0, 0.3, 0)
+Frame.Size = UDim2.new(0.25, 0, 0.35, 0)
+Frame.Active = true
+Frame.Draggable = true
 
-trollsKit.Name = "trollsKit"
-trollsKit.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-trollsKit.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-trollsKit.ResetOnSpawn = false
+-- DragFrame (to allow dragging)
+DragFrame.Name = "DragFrame"
+DragFrame.Parent = Frame
+DragFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+DragFrame.Size = UDim2.new(1, 0, 0.1, 0)
+DragFrame.Position = UDim2.new(0, 0, 0, 0)
+DragFrame.Active = true
+DragFrame.Draggable = true
 
-mainFrame.Name = "mainFrame"
-mainFrame.Parent = trollsKit
-mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-mainFrame.Position = UDim2.new(0, 424, 0, 116)
-mainFrame.Size = UDim2.new(0, 770, 0, 294)
-mainFrame.Active = true
-mainFrame.Draggable = true
+-- Transparency slider button settings
+TransparencySlider.Name = "TransparencySlider"
+TransparencySlider.Parent = Frame
+TransparencySlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+TransparencySlider.Position = UDim2.new(0.1, 0, 0.2, 0)
+TransparencySlider.Size = UDim2.new(0.8, 0, 0.2, 0)
+TransparencySlider.Text = "Adjust Transparency"
+TransparencySlider.TextColor3 = Color3.fromRGB(255, 0, 0)
 
-UICorner.Parent = mainFrame
+-- Size slider button settings
+SizeSlider.Name = "SizeSlider"
+SizeSlider.Parent = Frame
+SizeSlider.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+SizeSlider.Position = UDim2.new(0.1, 0, 0.5, 0)
+SizeSlider.Size = UDim2.new(0.8, 0, 0.2, 0)
+SizeSlider.Text = "Adjust Size"
+SizeSlider.TextColor3 = Color3.fromRGB(255, 0, 0)
 
-Buttons.Name = "Buttons"
-Buttons.Parent = mainFrame
+-- Close button settings
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = Frame
+CloseButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+CloseButton.Position = UDim2.new(0.35, 0, 0.8, 0)
+CloseButton.Size = UDim2.new(0.3, 0, 0.1, 0)
+CloseButton.Text = "Close"
+CloseButton.TextColor3 = Color3.fromRGB(255, 0, 0)
 
-HitboxButtons.Name = "HitboxButtons"
-HitboxButtons.Parent = Buttons
+-- Labels
+TransparencyLabel.Name = "TransparencyLabel"
+TransparencyLabel.Parent = Frame
+TransparencyLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TransparencyLabel.BackgroundTransparency = 1
+TransparencyLabel.Position = UDim2.new(0.1, 0, 0.05, 0)
+TransparencyLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
+TransparencyLabel.Text = "Hitbox Transparency: 80%"
 
-_25.Name = "25"
-_25.Parent = HitboxButtons
-_25.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-_25.Position = UDim2.new(0.864838481, 0, 0.380594462, 0)
-_25.Size = UDim2.new(0, 57, 0, 19)
-_25.Font = Enum.Font.SourceSansBold
-_25.Text = "25"
-_25.TextColor3 = Color3.fromRGB(255, 234, 0)
-_25.TextScaled = true
-_25.TextSize = 14.000
-_25.TextStrokeTransparency = 0.420
-_25.TextWrapped = true
+SizeLabel.Name = "SizeLabel"
+SizeLabel.Parent = Frame
+SizeLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SizeLabel.BackgroundTransparency = 1
+SizeLabel.Position = UDim2.new(0.1, 0, 0.35, 0)
+SizeLabel.Size = UDim2.new(0.8, 0, 0.1, 0)
+SizeLabel.Text = "Hitbox Size: 1x"
 
-UICorner_2.Parent = _25
-
-_50.Name = "50"
-_50.Parent = HitboxButtons
-_50.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-_50.Position = UDim2.new(0.769282937, 0, 0.481322408, 0)
-_50.Size = UDim2.new(0, 57, 0, 19)
-_50.Font = Enum.Font.SourceSansBold
-_50.Text = "50"
-_50.TextColor3 = Color3.fromRGB(255, 234, 0)
-_50.TextScaled = true
-_50.TextSize = 14.000
-_50.TextStrokeTransparency = 0.420
-_50.TextWrapped = true
-
-UICorner_3.Parent = _50
-
-_75.Name = "75"
-_75.Parent = HitboxButtons
-_75.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-_75.Position = UDim2.new(0.769282937, 0, 0.590046585, 0)
-_75.Size = UDim2.new(0, 57, 0, 19)
-_75.Font = Enum.Font.SourceSansBold
-_75.Text = "75"
-_75.TextColor3 = Color3.fromRGB(255, 234, 0)
-_75.TextScaled = true
-_75.TextSize = 14.000
-_75.TextStrokeTransparency = 0.420
-_75.TextWrapped = true
-
-UICorner_4.Parent = _75
-
-_10.Name = "10"
-_10.Parent = HitboxButtons
-_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-_10.Position = UDim2.new(0.689282835, 0, 0.380594462, 0)
-_10.Size = UDim2.new(0, 57, 0, 19)
-_10.Font = Enum.Font.SourceSansBold
-_10.Text = "10"
-_10.TextColor3 = Color3.fromRGB(255, 234, 0)
-_10.TextScaled = true
-_10.TextSize = 14.000
-_10.TextStrokeTransparency = 0.420
-_10.TextWrapped = true
-
-UICorner_5.Parent = _10
-
-_5.Name = "5"
-_5.Parent = HitboxButtons
-_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-_5.Position = UDim2.new(0.778171897, 0, 0.275510192, 0)
-_5.Size = UDim2.new(0, 57, 0, 19)
-_5.Font = Enum.Font.SourceSansBold
-_5.Text = "5"
-_5.TextColor3 = Color3.fromRGB(255, 234, 0)
-_5.TextScaled = true
-_5.TextSize = 14.000
-_5.TextStrokeTransparency = 0.420
-_5.TextWrapped = true
-
-UICorner_6.Parent = _5
-
-HitboxTransparency.Name = "HitboxTransparency"
-HitboxTransparency.Parent = Buttons
-HitboxTransparency.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-HitboxTransparency.Position = UDim2.new(0.0202256888, 0, 0.588435352, 0)
-HitboxTransparency.Size = UDim2.new(0, 137, 0, 37)
-HitboxTransparency.Font = Enum.Font.Unknown
-HitboxTransparency.Text = "Hitbox Transparency: 0.75"
-HitboxTransparency.TextColor3 = Color3.fromRGB(255, 234, 0)
-HitboxTransparency.TextScaled = true
-HitboxTransparency.TextSize = 14.000
-HitboxTransparency.TextStrokeTransparency = 0.420
-HitboxTransparency.TextWrapped = true
-
-UICorner_7.Parent = HitboxTransparency
-
-Close.Name = "Close"
-Close.Parent = Buttons
-Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Close.Position = UDim2.new(0.955029786, 0, -0.0464853868, 0)
-Close.Size = UDim2.new(0, 22, 0, 18)
-Close.Font = Enum.Font.Unknown
-Close.Text = "X"
-Close.TextColor3 = Color3.fromRGB(0, 0, 0)
-Close.TextScaled = true
-Close.TextSize = 14.000
-Close.TextWrapped = true
-
-UICorner_8.Parent = Close
-
-HitboxDistance.Name = "HitboxDistance"
-HitboxDistance.Parent = Buttons
-HitboxDistance.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-HitboxDistance.Position = UDim2.new(0.0217543244, 0, 0.435016245, 0)
-HitboxDistance.Size = UDim2.new(0, 137, 0, 37)
-HitboxDistance.Font = Enum.Font.Unknown
-HitboxDistance.Text = "Proximity-Based Hitbox Scaling: 30"
-HitboxDistance.TextColor3 = Color3.fromRGB(255, 234, 0)
-HitboxDistance.TextScaled = true
-HitboxDistance.TextSize = 14.000
-HitboxDistance.TextStrokeTransparency = 0.420
-HitboxDistance.TextWrapped = true
-
-UICorner_9.Parent = HitboxDistance
-
-Labels.Name = "Labels"
-Labels.Parent = mainFrame
-
-HitboxInfo.Name = "HitboxInfo"
-HitboxInfo.Parent = Labels
-HitboxInfo.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-HitboxInfo.BackgroundTransparency = 1.000
-HitboxInfo.Position = UDim2.new(0.7388165, 0, 0.159863949, 0)
-HitboxInfo.Size = UDim2.new(0, 96, 0, 24)
-HitboxInfo.Font = Enum.Font.Unknown
-HitboxInfo.Text = "* Hitbox Increase *"
-HitboxInfo.TextColor3 = Color3.fromRGB(255, 255, 255)
-HitboxInfo.TextScaled = true
-HitboxInfo.TextSize = 14.000
-HitboxInfo.TextWrapped = true
-
-BuildTip.Name = "BuildTip"
-BuildTip.Parent = Labels
-BuildTip.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-BuildTip.BackgroundTransparency = 1.000
-BuildTip.Position = UDim2.new(0.7388165, 0, 0.229264677, 0)
-BuildTip.Size = UDim2.new(0, 96, 0, 23)
-BuildTip.Font = Enum.Font.Unknown
-BuildTip.Text = "Weapons: All"
-BuildTip.TextColor3 = Color3.fromRGB(255, 255, 255)
-BuildTip.TextScaled = true
-BuildTip.TextSize = 14.000
-BuildTip.TextWrapped = true
-
-Title.Name = "Title"
-Title.Parent = Labels
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0.0300000001, 0, 0.015625, 0)
-Title.Size = UDim2.new(0, 101, 0, 38)
-Title.Font = Enum.Font.Unknown
-Title.Text = "TrollsKit"
-Title.TextColor3 = Color3.fromRGB(255, 234, 0)
-Title.TextScaled = true
-Title.TextSize = 14.000
-Title.TextStrokeTransparency = 0.500
-Title.TextWrapped = true
-
-version.Name = "version"
-version.Parent = Labels
-version.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-version.BackgroundTransparency = 1.000
-version.Position = UDim2.new(0.0578947383, 0, 0.779381871, 0)
-version.Size = UDim2.new(0, 78, 0, 25)
-version.Font = Enum.Font.Unknown
-version.Text = "Version: 4.0"
-version.TextColor3 = Color3.fromRGB(255, 234, 0)
-version.TextScaled = true
-version.TextSize = 14.000
-version.TextWrapped = true
-
-HideWarn.Name = "HideWarn"
-HideWarn.Parent = Labels
-HideWarn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-HideWarn.BackgroundTransparency = 1.000
-HideWarn.Position = UDim2.new(0.0578947383, 0, 0.772727251, 0)
-HideWarn.Size = UDim2.new(0, 191, 0, 25)
-HideWarn.Font = Enum.Font.Unknown
-HideWarn.Text = "*Press Y to Hide/Show*"
-HideWarn.TextColor3 = Color3.fromRGB(255, 234, 0)
-HideWarn.TextScaled = true
-HideWarn.TextSize = 14.000
-HideWarn.TextWrapped = true
-
-dc.Name = "dc"
-dc.Parent = Labels
-dc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-dc.BackgroundTransparency = 1.000
-dc.Position = UDim2.new(0.015873016, 0, 0.944444418, 0)
-dc.Size = UDim2.new(0, 109, 0, 23)
-dc.Font = Enum.Font.Unknown
-dc.Text = "Join our Discord!"
-dc.TextColor3 = Color3.fromRGB(255, 234, 0)
-dc.TextScaled = true
-dc.TextSize = 14.000
-dc.TextWrapped = true
-
-dc2.Name = "dc2"
-dc2.Parent = Labels
-dc2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-dc2.BackgroundTransparency = 1.000
-dc2.Position = UDim2.new(0.0100000001, 0, 0.944444418, 0)
-dc2.Size = UDim2.new(0, 137, 0, 23)
-dc2.Font = Enum.Font.Unknown
-dc2.Text = "https://discord.gg/example"
-dc2.TextColor3 = Color3.fromRGB(255, 234, 0)
-dc2.TextScaled = true
-dc2.TextSize = 14.000
-dc2.TextWrapped = true
-
-cre2.Name = "cre2"
-cre2.Parent = Labels
-cre2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-cre2.BackgroundTransparency = 1.000
-cre2.Position = UDim2.new(0.0100000001, 0, 0.81081079, 0)
-cre2.Size = UDim2.new(0, 110, 0, 23)
-cre2.Font = Enum.Font.Unknown
-cre2.Text = "Created By TROLLSDEV"
-cre2.TextColor3 = Color3.fromRGB(255, 234, 0)
-cre2.TextScaled = true
-cre2.TextSize = 14.000
-cre2.TextWrapped = true
-
--- Script:
-
-local UIS = game:GetService("UserInputService")
-local frame = mainFrame
-local dragStart, startPos
-
-local function updateInput(input)
-    local delta = input.Position - dragStart
-    frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
-
-frame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragStart = input.Position
-        startPos = frame.Position
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragStart = nil
-            end
-        end)
-    end
-end)
-
-frame.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        if dragStart then
-            updateInput(input)
+-- Functionality for sliders (adjust transparency)
+TransparencySlider.MouseButton1Click:Connect(function()
+    local transparency = tonumber(TransparencyLabel.Text:match("%d+"))
+    transparency = (transparency + 10) % 101
+    TransparencyLabel.Text = "Hitbox Transparency: " .. transparency .. "%"
+    
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
+            rootPart.Transparency = transparency / 100
         end
     end
 end)
 
-Close.MouseButton1Click:Connect(function()
-    trollsKit:Destroy()
-end)
-
--- Additional functionality for buttons (hitbox sizes, transparency, etc.)
-local hitboxSize = 10
-local transparency = 0.75
-local distance = 30
-
-local function setHitboxSize(size)
-    hitboxSize = size
-    -- Update hitbox size in game (you need to add code here)
-end
-
-local function setHitboxTransparency(trans)
-    transparency = trans
-    -- Update hitbox transparency in game (you need to add code here)
-end
-
-local function setHitboxDistance(dist)
-    distance = dist
-    -- Update hitbox distance in game (you need to add code here)
-end
-
-_25.MouseButton1Click:Connect(function() setHitboxSize(25) end)
-_50.MouseButton1Click:Connect(function() setHitboxSize(50) end)
-_75.MouseButton1Click:Connect(function() setHitboxSize(75) end)
-_10.MouseButton1Click:Connect(function() setHitboxSize(10) end)
-_5.MouseButton1Click:Connect(function() setHitboxSize(5) end)
-
-HitboxTransparency.MouseButton1Click:Connect(function()
-    transparency = transparency == 0.75 and 0.5 or 0.75
-    HitboxTransparency.Text = "Hitbox Transparency: " .. transparency
-    setHitboxTransparency(transparency)
-end)
-
-HitboxDistance.MouseButton1Click:Connect(function()
-    distance = distance == 30 and 50 or 30
-    HitboxDistance.Text = "Proximity-Based Hitbox Scaling: " .. distance
-    setHitboxDistance(distance)
-end)
-
-UIS.InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.Y then
-        trollsKit.Enabled = not trollsKit.Enabled
+-- Functionality for size slider (adjust size)
+SizeSlider.MouseButton1Click:Connect(function()
+    local size = tonumber(SizeLabel.Text:match("%d+"))
+    size = (size % 10) + 1
+    SizeLabel.Text = "Hitbox Size: " .. size .. "x"
+    
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
+            rootPart.Size = Vector3.new(2 * size, 2 * size, 1 * size)
+        end
     end
 end)
+
+-- Close button functionality
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Function to adjust hitbox size for all players in the server
+function adjustHitboxSize(size)
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
+            rootPart.Size = Vector3.new(2 * size, 2 * size, 1 * size)
+            rootPart.Transparency = 0.8 -- default transparency
+        end
+    end
+end
+
+-- Initial call to adjust hitbox sizes for all players when the script is loaded
+adjustHitboxSize(1) -- Set default hitbox size to 1x
