@@ -8,10 +8,12 @@ local SizeSlider = Instance.new("TextButton")
 local TransparencyLabel = Instance.new("TextLabel")
 local SizeLabel = Instance.new("TextLabel")
 
+local localPlayer = game.Players.LocalPlayer -- Get the player using the script
+
 ScreenGui.Name = "5362-Kit"
 ScreenGui.Parent = game.CoreGui
 
--- Frame settings (Now 2 times bigger)
+-- Frame settings (2 times bigger)
 Frame.Name = "MainFrame"
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -83,12 +85,14 @@ TransparencySlider.MouseButton1Click:Connect(function()
     for _, player in pairs(game.Players:GetPlayers()) do
         if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
             local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
-            rootPart.Transparency = transparency / 100
+            if player ~= localPlayer then -- Only adjust hitbox for other players
+                rootPart.Transparency = transparency / 100
+            end
         end
     end
 end)
 
--- Functionality for size slider (adjust size up to 100x)
+-- Functionality for size slider (adjust size up to 100x, except for the local player)
 SizeSlider.MouseButton1Click:Connect(function()
     local size = tonumber(SizeLabel.Text:match("%d+"))
     size = (size % 100) + 1
@@ -97,7 +101,9 @@ SizeSlider.MouseButton1Click:Connect(function()
     for _, player in pairs(game.Players:GetPlayers()) do
         if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
             local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
-            rootPart.Size = Vector3.new(2 * size, 2 * size, 1 * size)
+            if player ~= localPlayer then -- Skip adjusting the local player's hitbox
+                rootPart.Size = Vector3.new(2 * size, 2 * size, 1 * size)
+            end
         end
     end
 end)
@@ -107,16 +113,18 @@ CloseButton.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
--- Function to adjust hitbox size for all players in the server
+-- Function to adjust hitbox size for all players in the server, except the local player
 function adjustHitboxSize(size)
     for _, player in pairs(game.Players:GetPlayers()) do
         if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
             local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
-            rootPart.Size = Vector3.new(2 * size, 2 * size, 1 * size)
-            rootPart.Transparency = 0.8 -- default transparency
+            if player ~= localPlayer then -- Skip the local player
+                rootPart.Size = Vector3.new(2 * size, 2 * size, 1 * size)
+                rootPart.Transparency = 0.8 -- default transparency
+            end
         end
     end
 end
 
--- Initial call to adjust hitbox sizes for all players when the script is loaded
-adjustHitboxSize(1) -- Set default hitbox size to 1x
+-- Initial call to adjust hitbox sizes for all players when the script is loaded, except the local player
+adjustHitboxSize(1) -- Set default hitbox size to 1x for all other players
