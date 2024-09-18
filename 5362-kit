@@ -1,4 +1,4 @@
--- Define UI elements for transparency, hitbox scaling, and flying
+-- Define UI elements for transparency, hitbox scaling, flying, and auto-aim
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local DragFrame = Instance.new("Frame")
@@ -8,9 +8,13 @@ local SizeSlider = Instance.new("TextButton")
 local TransparencyLabel = Instance.new("TextLabel")
 local SizeLabel = Instance.new("TextLabel")
 local FloatButton = Instance.new("TextButton")
+local AutoAimButton = Instance.new("TextButton")
 
 local localPlayer = game.Players.LocalPlayer -- Get the player using the script
 local floatActive = false -- Keep track of whether the float is active
+local autoAimActive = false -- Keep track of whether auto-aim is active
+local aimAssistRange = 10000 -- Range for auto-aim
+local aimSpeed = 0.1 -- Speed at which the camera adjusts
 
 ScreenGui.Name = "5362-Kit"
 ScreenGui.Parent = game.CoreGui
@@ -61,14 +65,23 @@ CloseButton.Size = UDim2.new(0.3, 0, 0.1, 0)
 CloseButton.Text = "Close"
 CloseButton.TextColor3 = Color3.fromRGB(255, 0, 0)
 
--- "Flot Above Head" button
+-- "Float Above Head" button
 FloatButton.Name = "FloatButton"
 FloatButton.Parent = Frame
 FloatButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 FloatButton.Position = UDim2.new(0.1, 0, 0.7, 0)
 FloatButton.Size = UDim2.new(0.8, 0, 0.1, 0)
-FloatButton.Text = "Flot Above Head"
+FloatButton.Text = "Float Above Head"
 FloatButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+
+-- "Auto Aim" button
+AutoAimButton.Name = "AutoAimButton"
+AutoAimButton.Parent = Frame
+AutoAimButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+AutoAimButton.Position = UDim2.new(0.1, 0, 0.85, 0)
+AutoAimButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+AutoAimButton.Text = "Auto Aim"
+AutoAimButton.TextColor3 = Color3.fromRGB(255, 0, 0)
 
 -- Labels
 TransparencyLabel.Name = "TransparencyLabel"
@@ -127,7 +140,7 @@ end)
 -- Find the nearest player function
 local function getNearestPlayer()
     local nearestPlayer = nil
-    local shortestDistance = math.huge
+    local shortestDistance = aimAssistRange
     
     for _, player in pairs(game.Players:GetPlayers()) do
         if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -171,7 +184,38 @@ FloatButton.MouseButton1Click:Connect(function()
             end)
         end
     end
-end)
 
--- Initial call to adjust hitbox sizes for all players when the script is loaded, except the local player
-adjustHitboxSize(1) -- Set default hitbox size to 1x for all other players
+-- Auto-Aim Functionality
+AutoAimButton.MouseButton1Click:Connect(function()
+    autoAimActive = not autoAimActive -- Toggle auto-aim on/off
+
+    if autoAimActive then
+        AutoAimButton.Text = "Auto Aim: ON"
+        
+        -- Function to automatically aim at the nearest player
+        local function aimAtNearestPlayer()
+            while autoAimActive do
+                local nearestPlayer = getNearestPlayer()
+                if nearestPlayer and nearestPlayer.Character and nearestPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local target = nearestPlayer.Character:FindFirstChild("HumanoidRootPart")
+                    local hrp = localPlayer.Character:FindFirstChild("HumanoidRootPart")
+                    
+                    -- Smoothly adjust the camera to face the target
+                    local cam = game.Workspace.CurrentCamera
+                    local targetPos = target.Position
+                    local camPos = cam.CFrame.Position
+                    local direction = (targetPos - camPos).unit
+                    local newCamCFrame = CFrame.new(camPos, camPos + direction)
+                    
+                    cam.CFrame = CFrame.new(cam.CFrame.Position, target.Position)
+                end
+                wait(aimSpeed) -- Adjust the speed of the aiming
+            end
+        end
+        
+        -- Start aiming at the nearest player
+        spawn(aimAtNearestPlayer)
+    else
+        AutoAimButton.Text = "Auto Aim: OFF"
+    end
+end)
