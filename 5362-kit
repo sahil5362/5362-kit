@@ -1,4 +1,4 @@
--- Define UI elements for transparency and hitbox scaling
+-- Define UI elements for transparency, hitbox scaling, and flying
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local DragFrame = Instance.new("Frame")
@@ -7,8 +7,10 @@ local TransparencySlider = Instance.new("TextButton")
 local SizeSlider = Instance.new("TextButton")
 local TransparencyLabel = Instance.new("TextLabel")
 local SizeLabel = Instance.new("TextLabel")
+local FloatButton = Instance.new("TextButton")
 
 local localPlayer = game.Players.LocalPlayer -- Get the player using the script
+local floatActive = false -- Keep track of whether the float is active
 
 ScreenGui.Name = "5362-Kit"
 ScreenGui.Parent = game.CoreGui
@@ -58,6 +60,15 @@ CloseButton.Position = UDim2.new(0.35, 0, 0.8, 0)
 CloseButton.Size = UDim2.new(0.3, 0, 0.1, 0)
 CloseButton.Text = "Close"
 CloseButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+
+-- "Flot Above Head" button
+FloatButton.Name = "FloatButton"
+FloatButton.Parent = Frame
+FloatButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+FloatButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+FloatButton.Size = UDim2.new(0.8, 0, 0.1, 0)
+FloatButton.Text = "Flot Above Head"
+FloatButton.TextColor3 = Color3.fromRGB(255, 0, 0)
 
 -- Labels
 TransparencyLabel.Name = "TransparencyLabel"
@@ -113,18 +124,54 @@ CloseButton.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
--- Function to adjust hitbox size for all players in the server, except the local player
-function adjustHitboxSize(size)
+-- Find the nearest player function
+local function getNearestPlayer()
+    local nearestPlayer = nil
+    local shortestDistance = math.huge
+    
     for _, player in pairs(game.Players:GetPlayers()) do
-        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-            local rootPart = player.Character:FindFirstChild("HumanoidRootPart")
-            if player ~= localPlayer then -- Skip the local player
-                rootPart.Size = Vector3.new(2 * size, 2 * size, 1 * size)
-                rootPart.Transparency = 0.8 -- default transparency
+        if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local distance = (localPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).magnitude
+            if distance < shortestDistance then
+                shortestDistance = distance
+                nearestPlayer = player
             end
         end
     end
+    
+    return nearestPlayer
 end
+
+-- Float above nearest player's head
+FloatButton.MouseButton1Click:Connect(function()
+    if not floatActive then
+        floatActive = true -- Prevent multiple instances
+        local nearestPlayer = getNearestPlayer()
+        
+        if nearestPlayer and nearestPlayer.Character and nearestPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local hrp = localPlayer.Character:FindFirstChild("HumanoidRootPart")
+            local target = nearestPlayer.Character:FindFirstChild("HumanoidRootPart")
+            
+            -- Tween to fly above the target player
+            local tweenService = game:GetService("TweenService")
+            local goal = {Position = target.Position + Vector3.new(0, 10, 0)} -- Float 10 studs above
+            local tweenInfo = TweenInfo.new((hrp.Position - goal.Position).magnitude / 300, Enum.EasingStyle.Linear)
+            local tween = tweenService:Create(hrp, tweenInfo, goal)
+            tween:Play()
+
+            -- Keep the player floating above the target player until the target dies
+            local connection
+            connection = game:GetService("RunService").Heartbeat:Connect(function()
+                if nearestPlayer and nearestPlayer.Character and nearestPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    hrp.CFrame = CFrame.new(target.Position + Vector3.new(0, 10, 0))
+                else
+                    connection:Disconnect()
+                    floatActive = false -- Allow floating again after the player dies
+                end
+            end)
+        end
+    end
+end)
 
 -- Initial call to adjust hitbox sizes for all players when the script is loaded, except the local player
 adjustHitboxSize(1) -- Set default hitbox size to 1x for all other players
